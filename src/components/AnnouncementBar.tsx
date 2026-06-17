@@ -25,7 +25,7 @@ export function AnnouncementBar() {
   }, [paused]);
 
   return (
-    <div className="bg-ink text-paper">
+    <div className="border-b border-line bg-paper text-ink">
       <div className="container-x relative flex h-9 items-center justify-center">
         <p
           key={index}
@@ -37,7 +37,7 @@ export function AnnouncementBar() {
           type="button"
           onClick={() => setPaused((p) => !p)}
           aria-label={paused ? "Play announcements" : "Pause announcements"}
-          className="absolute right-0 grid h-9 w-9 place-items-center text-paper/80 hover:text-paper"
+          className="absolute right-0 grid h-9 w-9 place-items-center text-ink/60 hover:text-ink"
         >
           {paused ? (
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">

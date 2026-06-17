@@ -1,76 +1,64 @@
 import Link from "next/link";
 import { products } from "@/lib/products";
-import { ProductCard } from "@/components/ProductCard";
 import { TeeMockup } from "@/components/TeeMockup";
 
 export default function HomePage() {
-  const featured = products.slice(0, 4);
-  const tiles = products.slice(0, 2);
+  // Words shown as the labeled tile grid below the hero.
+  const tiles = products.slice(0, 6);
 
   return (
     <>
-      {/* FULL-BLEED HERO — leads with the word "crazy" */}
-      <section className="relative">
-        <div className="relative flex min-h-[78vh] items-end overflow-hidden bg-gradient-to-br from-blush-400 via-blush-500 to-ink">
-          <span className="word-mark pointer-events-none absolute right-4 top-1/4 select-none text-[28vw] leading-none text-white/10 sm:right-16 sm:text-[18vw]">
-            crazy
-          </span>
+      {/*
+        FULL-BLEED HERO — a single editorial image with the header floating over
+        it. The gradient is a PLACEHOLDER: drop a real hero photograph in here
+        (e.g. next/image fill) and keep the bottom scrim + text block.
+        The negative top margin pulls the image up under the transparent header.
+      */}
+      <section className="relative -mt-[72px] h-[92svh] min-h-[560px] w-full overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blush-300 via-blush-500 to-ink" />
+        {/* scrim for text legibility, like the reference's darker lower third */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/15" />
 
-          <div className="container-x relative z-10 pb-14 pt-24 text-paper">
-            <p className="text-[11px] font-semibold uppercase tracking-widest2 text-paper/80">
-              Shadow work you can wear
-            </p>
-            <h1 className="display mt-3 max-w-3xl text-5xl sm:text-7xl">
-              They called you{" "}
-              <span className="word-mark lowercase tracking-normal">crazy</span>
-              <br />
-              so wear it out loud.
-            </h1>
-            <p className="mt-5 max-w-md text-paper/85">
-              We take the words we&apos;ve been shamed by — crazy, toxic, bitch,
-              fake, poor — and turn each one into something owned instead of
-              hidden.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/shop"
-                className="btn bg-paper text-ink hover:bg-bone"
-              >
-                Shop the words
-              </Link>
-              <Link
-                href="/story"
-                className="btn border border-paper text-paper hover:bg-paper hover:text-ink"
-              >
-                Why we do this
-              </Link>
-            </div>
-          </div>
+        <div className="container-x relative flex h-full flex-col justify-end pb-12 text-paper sm:pb-16">
+          <h1 className="display max-w-2xl text-4xl sm:text-6xl">
+            They called you crazy
+          </h1>
+          <p className="mt-3 max-w-md text-paper/90">
+            So wear it out loud. Shadow work you can wear.
+          </p>
+          <Link
+            href="/shop"
+            className="mt-4 inline-block w-fit text-sm font-semibold uppercase tracking-wider2 underline decoration-1 underline-offset-[6px] hover:opacity-70"
+          >
+            Shop Now
+          </Link>
         </div>
       </section>
 
-      {/* WORD TILES — editorial two-up */}
-      <section className="container-x py-16">
-        <div className="grid gap-4 sm:grid-cols-2">
+      {/* LANDING TILE GRID — two columns, bold uppercase label under each image */}
+      <section className="container-x py-10 sm:py-14">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {tiles.map((p) => (
             <Link key={p.slug} href={`/shop/${p.slug}`} className="group block">
               <div className="overflow-hidden">
                 <TeeMockup
                   product={p}
-                  className="aspect-[4/3] transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="aspect-[4/5] transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </div>
-              <h2 className="display mt-3 text-2xl capitalize">“{p.word}”</h2>
-              <p className="link-underline mt-1 inline-block text-xs uppercase tracking-wider2">
-                Shop now
-              </p>
+              <h2 className="display mt-2 text-lg sm:text-2xl">{p.word}</h2>
             </Link>
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <Link href="/shop" className="btn-outline">
+            Shop all words
+          </Link>
+        </div>
       </section>
 
-      {/* SPOTLIGHT — keeps our practice wording in the reference's spotlight format */}
-      <section className="relative overflow-hidden bg-ink text-paper">
+      {/* SPOTLIGHT — the practice (kept wording) */}
+      <section className="bg-ink text-paper">
         <div className="container-x grid gap-10 py-20 md:grid-cols-2 md:items-center">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-widest2 text-blush-300">
@@ -106,26 +94,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRENDING RAIL */}
-      <section className="container-x py-16">
-        <div className="flex items-end justify-between">
-          <h2 className="display text-3xl sm:text-4xl">Words, reclaimed</h2>
-          <Link
-            href="/shop"
-            className="link-underline text-xs uppercase tracking-wider2"
-          >
-            See all
-          </Link>
-        </div>
-        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
-          {featured.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
-        </div>
-      </section>
-
-      {/* VALUE PROPS — icon row */}
-      <section className="border-y border-line">
+      {/* VALUE PROPS */}
+      <section className="border-b border-line">
         <div className="container-x grid grid-cols-2 divide-x divide-line text-center md:grid-cols-4">
           {[
             ["Ships in 1–5 days", "Soft combed cotton"],

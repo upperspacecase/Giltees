@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useCart } from "./CartContext";
 import { useWishlist } from "./WishlistContext";
 import { useUI } from "./UIContext";
@@ -18,10 +19,35 @@ export function SiteHeader() {
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
   const { openCart } = useUI();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const isHome = pathname === "/";
+
+  // On the homepage the header floats transparently over the full-bleed hero,
+  // then turns solid once you scroll past it.
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(true);
+      return;
+    }
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const overlay = isHome && !scrolled && !open;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
+        overlay
+          ? "bg-transparent text-paper"
+          : "border-b border-line bg-paper/95 text-ink backdrop-blur"
+      }`}
+    >
       <div className="container-x flex h-[72px] items-center gap-4">
         {/* Left: script wordmark (kept) */}
         <Link
@@ -66,7 +92,11 @@ export function SiteHeader() {
           >
             <BagIcon className="h-[22px] w-[22px]" />
             {count > 0 && (
-              <span className="absolute -right-2 -top-1.5 flex h-4 min-w-4 items-center justify-center bg-ink px-1 text-[10px] font-bold text-paper">
+              <span
+                className={`absolute -right-2 -top-1.5 flex h-4 min-w-4 items-center justify-center px-1 text-[10px] font-bold ${
+                  overlay ? "bg-paper text-ink" : "bg-ink text-paper"
+                }`}
+              >
                 {count}
               </span>
             )}
@@ -90,7 +120,7 @@ export function SiteHeader() {
 
       {/* Nav lives behind the menu at every breakpoint, matching the reference */}
       {open && (
-        <nav className="border-t border-line bg-paper">
+        <nav className="border-t border-line bg-paper text-ink">
           <div className="container-x flex flex-col py-2">
             {links.map((l) => (
               <Link
