@@ -8,7 +8,10 @@ export type Product = {
   // a short shadow-work "practice" prompt that ships with the word
   practice: string;
   price: number;
-  // tailwind gradient classes for the tee mockup tile
+  // Real product photo, dropped into /public/images/products/<slug>.<ext>.
+  // When set, it replaces the gradient placeholder everywhere the tee shows.
+  image?: string;
+  // tailwind gradient classes for the tee mockup tile (fallback before a photo)
   tileFrom: string;
   tileTo: string;
   textTone: "light" | "dark";
@@ -39,6 +42,7 @@ export const products: Product[] = [
     practice:
       "Recall a boundary that got you called toxic. Say it out loud again, exactly as you set it. Notice it still stands.",
     price: 42,
+    image: "/images/products/toxic.png",
     tileFrom: "from-ink",
     tileTo: "to-blush-600",
     textTone: "light",

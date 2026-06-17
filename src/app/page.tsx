@@ -1,6 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { TeeMockup } from "@/components/TeeMockup";
+
+// Hero is driven by one config — swap `image`/`headline` to re-shoot the hero.
+const hero = {
+  image: "/images/products/toxic.png",
+  headline: "They called you toxic",
+  subhead: "So wear it out loud. Shadow work you can wear.",
+};
 
 export default function HomePage() {
   // Words shown as the labeled tile grid below the hero.
@@ -15,17 +23,22 @@ export default function HomePage() {
         The negative top margin pulls the image up under the transparent header.
       */}
       <section className="relative -mt-[72px] h-[92svh] min-h-[560px] w-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blush-300 via-blush-500 to-ink" />
+        <Image
+          src={hero.image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
         {/* scrim for text legibility, like the reference's darker lower third */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/5" />
 
         <div className="container-x relative flex h-full flex-col justify-end pb-12 text-paper sm:pb-16">
           <h1 className="display max-w-2xl text-4xl sm:text-6xl">
-            They called you crazy
+            {hero.headline}
           </h1>
-          <p className="mt-3 max-w-md text-paper/90">
-            So wear it out loud. Shadow work you can wear.
-          </p>
+          <p className="mt-3 max-w-md text-paper/90">{hero.subhead}</p>
           <Link
             href="/shop"
             className="mt-4 inline-block w-fit text-sm font-semibold uppercase tracking-wider2 underline decoration-1 underline-offset-[6px] hover:opacity-70"

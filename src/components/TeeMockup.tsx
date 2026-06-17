@@ -1,15 +1,38 @@
+import Image from "next/image";
 import type { Product } from "@/lib/products";
 
-// Stylized tee mockup. A deliberate placeholder for the brand's next phase:
-// real photography of diverse people wearing the pieces. The gradient is where
-// the brand's pink lives until those photos exist.
+// Shows the real product photo when one exists; otherwise a stylized gradient
+// placeholder (a deliberate stand-in until photography lands). The gradient is
+// where the brand's pink lives until those photos exist.
 export function TeeMockup({
   product,
   className = "",
+  sizes = "(min-width: 1024px) 25vw, 50vw",
+  priority = false,
 }: {
-  product: Pick<Product, "word" | "tileFrom" | "tileTo" | "textTone">;
+  product: Pick<
+    Product,
+    "word" | "image" | "tileFrom" | "tileTo" | "textTone"
+  >;
   className?: string;
+  sizes?: string;
+  priority?: boolean;
 }) {
+  if (product.image) {
+    return (
+      <div className={`relative aspect-[4/5] overflow-hidden bg-bone ${className}`}>
+        <Image
+          src={product.image}
+          alt={`Giltees “${product.word}” tee`}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   const wordColor = product.textTone === "light" ? "text-paper" : "text-ink";
 
   return (
