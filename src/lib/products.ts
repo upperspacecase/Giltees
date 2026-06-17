@@ -29,6 +29,7 @@ export const products: Product[] = [
     practice:
       "Name one time you were called crazy for reacting to something that was actually happening. Write what you saw that they wanted you to un-see.",
     price: 42,
+    image: "/images/products/crazy.png",
     tileFrom: "from-blush-500",
     tileTo: "to-ink",
     textTone: "light",
@@ -98,6 +99,7 @@ export const products: Product[] = [
     practice:
       "List three things you've dimmed to be 'less.' Pick one to turn back up this week.",
     price: 44,
+    image: "/images/products/too-much.png",
     tileFrom: "from-blush-500",
     tileTo: "to-blush-700",
     textTone: "light",
@@ -111,6 +113,7 @@ export const products: Product[] = [
     practice:
       "Recall a feeling you were told was 'too sensitive.' Ask it what it was trying to warn you about.",
     price: 42,
+    image: "/images/products/sensitive.png",
     tileFrom: "from-blush-300",
     tileTo: "to-ink-soft",
     textTone: "light",
