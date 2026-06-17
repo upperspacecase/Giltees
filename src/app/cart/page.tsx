@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
-import { products } from "@/lib/products";
+import { ProductThumb } from "@/components/ProductThumb";
 
 export default function CartPage() {
   const { items, subtotal, updateQty, removeItem } = useCart();
@@ -15,7 +15,7 @@ export default function CartPage() {
           Nothing reclaimed yet. Find the word that was used against you.
         </p>
         <Link href="/shop" className="btn-primary mt-8">
-          Shop the words
+          Collection
         </Link>
       </div>
     );
@@ -30,21 +30,16 @@ export default function CartPage() {
       <div className="mt-10 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
         <ul className="divide-y divide-line border-y border-line">
           {items.map((item) => {
-            const p = products.find((x) => x.slug === item.slug);
             return (
               <li
                 key={`${item.slug}-${item.size}`}
                 className="flex flex-wrap items-center gap-5 py-6"
               >
-                <div
-                  className={`flex h-24 w-20 shrink-0 items-center justify-center bg-gradient-to-br ${
-                    p?.tileFrom ?? "from-blush-500"
-                  } ${p?.tileTo ?? "to-ink"}`}
-                >
-                  <span className="word-mark text-base text-paper">
-                    {item.word}
-                  </span>
-                </div>
+                <ProductThumb
+                  slug={item.slug}
+                  word={item.word}
+                  className="h-24 w-20 text-base"
+                />
 
                 <div className="min-w-0 flex-1">
                   <p className="text-[11px] uppercase tracking-wider2 text-ink-muted">

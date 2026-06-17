@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
+import { ProductThumb } from "@/components/ProductThumb";
 
 export default function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
@@ -38,7 +39,7 @@ export default function CheckoutPage() {
       <div className="container-x py-24 text-center">
         <h1 className="display text-4xl">Nothing to check out</h1>
         <Link href="/shop" className="btn-primary mt-8">
-          Shop the words
+          Collection
         </Link>
       </div>
     );
@@ -125,13 +126,18 @@ export default function CheckoutPage() {
 
         <aside className="h-fit border border-line p-7">
           <h2 className="display text-2xl">Your order</h2>
-          <ul className="mt-5 space-y-3">
+          <ul className="mt-5 space-y-4">
             {items.map((i) => (
               <li
                 key={`${i.slug}-${i.size}`}
-                className="flex justify-between gap-3 text-sm"
+                className="flex items-center gap-3 text-sm"
               >
-                <span>
+                <ProductThumb
+                  slug={i.slug}
+                  word={i.word}
+                  className="h-16 w-14 text-xs"
+                />
+                <span className="min-w-0 flex-1">
                   “{i.word}” · {i.size} × {i.qty}
                 </span>
                 <span className="font-semibold">${i.qty * i.price}</span>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "./CartContext";
 import { useUI } from "./UIContext";
 import { products } from "@/lib/products";
+import { ProductThumb } from "./ProductThumb";
 import { CloseIcon } from "./icons";
 
 export function CartDrawer() {
@@ -63,7 +64,7 @@ export function CartDrawer() {
                 onClick={closeCart}
                 className="btn-outline mt-6 w-full sm:w-auto"
               >
-                Shop the words
+                Collection
               </Link>
             </div>
 
@@ -77,13 +78,11 @@ export function CartDrawer() {
                       onClick={closeCart}
                       className="flex items-center gap-4 py-4"
                     >
-                      <span
-                        className={`flex h-16 w-14 shrink-0 items-center justify-center bg-gradient-to-br ${p.tileFrom} ${p.tileTo}`}
-                      >
-                        <span className="word-mark text-sm text-paper">
-                          {p.word}
-                        </span>
-                      </span>
+                      <ProductThumb
+                        slug={p.slug}
+                        word={p.word}
+                        className="h-16 w-14 text-sm"
+                      />
                       <span className="min-w-0 flex-1">
                         <span className="block text-[11px] uppercase tracking-wider2 text-ink-muted">
                           The reclaim tee
@@ -110,19 +109,11 @@ export function CartDrawer() {
                   key={`${item.slug}-${item.size}`}
                   className="flex gap-4 py-5"
                 >
-                  <span
-                    className={`flex h-24 w-20 shrink-0 items-center justify-center bg-gradient-to-br ${
-                      products.find((p) => p.slug === item.slug)?.tileFrom ??
-                      "from-blush-500"
-                    } ${
-                      products.find((p) => p.slug === item.slug)?.tileTo ??
-                      "to-ink"
-                    }`}
-                  >
-                    <span className="word-mark text-base text-paper">
-                      {item.word}
-                    </span>
-                  </span>
+                  <ProductThumb
+                    slug={item.slug}
+                    word={item.word}
+                    className="h-24 w-20 text-base"
+                  />
 
                   <div className="flex min-w-0 flex-1 flex-col">
                     <span className="text-[11px] uppercase tracking-wider2 text-ink-muted">

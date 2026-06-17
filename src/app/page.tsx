@@ -66,7 +66,7 @@ export default function HomePage() {
         </div>
         <div className="mt-8 text-center">
           <Link href="/shop" className="btn-outline">
-            Shop all words
+            Collection
           </Link>
         </div>
       </section>

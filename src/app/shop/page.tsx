@@ -13,7 +13,7 @@ export default function ShopPage() {
   return (
     <div className="container-x py-12">
       <header className="border-b border-line pb-8">
-        <h1 className="display text-5xl sm:text-6xl">Shop the words</h1>
+        <h1 className="display text-5xl sm:text-6xl">Collection</h1>
         <p className="mt-4 max-w-2xl text-ink-muted">
           Each tee names a word you were shamed by. Pick yours — it ships with a
           practice prompt to help you actually integrate it, not just style it.

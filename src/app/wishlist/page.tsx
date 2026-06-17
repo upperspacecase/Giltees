@@ -45,7 +45,7 @@ export default function WishlistPage() {
             You don&apos;t have any words in your wishlist yet.
           </p>
           <Link href="/shop" className="btn-primary mt-6">
-            Shop the words
+            Collection
           </Link>
         </div>
       )}
