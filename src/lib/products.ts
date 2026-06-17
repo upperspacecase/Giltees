@@ -56,6 +56,7 @@ export const products: Product[] = [
     practice:
       "Think of a time you softened your 'no' so no one would call you this. Re-say the 'no' without the softening.",
     price: 42,
+    image: "/images/products/bitch.png",
     tileFrom: "from-blush-400",
     tileTo: "to-blush-700",
     textTone: "light",
