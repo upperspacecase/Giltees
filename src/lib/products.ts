@@ -70,6 +70,7 @@ export const products: Product[] = [
     practice:
       "Find a version of you someone called fake. Thank them — that version was you reaching for something truer.",
     price: 42,
+    image: "/images/products/fake.png",
     tileFrom: "from-blush-200",
     tileTo: "to-ink",
     textTone: "dark",
@@ -83,6 +84,7 @@ export const products: Product[] = [
     practice:
       "Write down one thing you learned from having less that the comfortable never had to learn. Keep the receipt.",
     price: 42,
+    image: "/images/products/poor.png",
     tileFrom: "from-blush-300",
     tileTo: "to-ink",
     textTone: "light",
@@ -122,6 +124,7 @@ export const products: Product[] = [
     practice:
       "Name a moment you were called dramatic. State, plainly, what actually happened. Let it be exactly that big.",
     price: 42,
+    image: "/images/products/dramatic.png",
     tileFrom: "from-ink",
     tileTo: "to-blush-500",
     textTone: "light",
