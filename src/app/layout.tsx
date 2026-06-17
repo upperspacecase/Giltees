@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Pacifico, Fredoka, Quicksand } from "next/font/google";
+import { Pacifico, Archivo } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
+import { WishlistProvider } from "@/components/WishlistContext";
+import { UIProvider } from "@/components/UIContext";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CartDrawer } from "@/components/CartDrawer";
 
-// Bold retro-script for the brand wordmark.
+// Retro-script brand wordmark — kept as the brand anchor.
 const script = Pacifico({
   weight: "400",
   subsets: ["latin"],
@@ -13,19 +17,11 @@ const script = Pacifico({
   display: "swap",
 });
 
-// Soft, playful display for the reclaimed words.
-const display = Fredoka({
-  weight: ["400", "500", "600", "700"],
+// Heavy editorial grotesque for headings + clean body text.
+const archivo = Archivo({
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-display",
-  display: "swap",
-});
-
-// Gentle, gender-neutral body voice.
-const body = Quicksand({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-body",
   display: "swap",
 });
 
@@ -36,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Giltees — shadow work you can wear",
     description:
-      "Take the word that was used against you and wear it out loud. Pink-and-black tees for anyone integrating the parts they were taught to hide.",
+      "Take the word that was used against you and wear it out loud. Tees for anyone integrating the parts they were taught to hide.",
     type: "website",
   },
 };
@@ -47,16 +43,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${script.variable} ${display.variable} ${body.variable}`}
-    >
-      <body className="grain font-body">
-        <CartProvider>
-          <SiteHeader />
-          <main className="min-h-[60vh]">{children}</main>
-          <SiteFooter />
-        </CartProvider>
+    <html lang="en" className={`${script.variable} ${archivo.variable}`}>
+      <body className="font-body">
+        <UIProvider>
+          <WishlistProvider>
+            <CartProvider>
+              <AnnouncementBar />
+              <SiteHeader />
+              <main className="min-h-[60vh]">{children}</main>
+              <SiteFooter />
+              <CartDrawer />
+            </CartProvider>
+          </WishlistProvider>
+        </UIProvider>
       </body>
     </html>
   );

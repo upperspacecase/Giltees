@@ -78,9 +78,9 @@ export const products: Product[] = [
     practice:
       "Write down one thing you learned from having less that the comfortable never had to learn. Keep the receipt.",
     price: 42,
-    tileFrom: "from-clay-300",
+    tileFrom: "from-blush-300",
     tileTo: "to-ink",
-    textTone: "dark",
+    textTone: "light",
   },
   {
     slug: "too-much",

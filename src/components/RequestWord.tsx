@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { ArrowRight } from "./icons";
 
 type Variant = "footer" | "section";
 
@@ -32,29 +33,9 @@ export function RequestWord({ variant = "section" }: { variant?: Variant }) {
 
   if (done) {
     return (
-      <div
-        className={
-          variant === "footer"
-            ? "rounded-2xl border border-blush-300/30 bg-white/5 p-4"
-            : "rounded-3xl border border-blush-200 bg-white p-8 text-center shadow-soft"
-        }
-      >
-        <p
-          className={
-            variant === "footer"
-              ? "font-display text-lg text-blush-200"
-              : "font-display text-2xl text-ink"
-          }
-        >
-          “{word}” — received. 🖤
-        </p>
-        <p
-          className={
-            variant === "footer"
-              ? "mt-1 text-sm text-blush-100/70"
-              : "mt-2 text-ink-muted"
-          }
-        >
+      <div className="border border-line bg-bone p-6 text-center">
+        <p className="display text-2xl">“{word}” — received 🖤</p>
+        <p className="mt-2 text-ink-muted">
           Thank you for trusting us with it. We read every one.
         </p>
       </div>
@@ -63,36 +44,34 @@ export function RequestWord({ variant = "section" }: { variant?: Variant }) {
 
   if (variant === "footer") {
     return (
-      <form onSubmit={onSubmit} className="flex gap-2">
+      <form onSubmit={onSubmit} className="flex">
         <input
           aria-label="Your word"
           value={word}
           onChange={(e) => setWord(e.target.value)}
           placeholder="your word…"
-          className="w-full rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white placeholder:text-blush-100/50 focus:border-blush-300 focus:outline-none"
+          className="h-12 w-full border border-ink border-r-0 bg-paper px-4 text-sm placeholder:text-ink-muted focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded-full bg-blush-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blush-400"
+          aria-label="Send your word"
+          className="grid h-12 w-12 shrink-0 place-items-center bg-ink text-paper transition hover:bg-ink-soft"
         >
-          Send
+          <ArrowRight className="h-5 w-5" />
         </button>
       </form>
     );
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="rounded-3xl border border-blush-200 bg-white p-6 shadow-soft sm:p-8"
-    >
+    <form onSubmit={onSubmit} className="border border-ink bg-paper p-6 sm:p-8">
       <label className="block">
         <span className="eyebrow">The word</span>
         <input
           value={word}
           onChange={(e) => setWord(e.target.value)}
           placeholder="What were you called?"
-          className="mt-2 w-full rounded-2xl border border-blush-200 bg-blush-50 px-5 py-3 font-display text-lg text-ink placeholder:text-ink/30 focus:border-blush-400 focus:outline-none"
+          className="mt-2 h-12 w-full border border-line bg-bone px-4 font-display text-lg placeholder:text-ink-muted/60 focus:border-ink focus:outline-none"
         />
       </label>
 
@@ -103,11 +82,11 @@ export function RequestWord({ variant = "section" }: { variant?: Variant }) {
           onChange={(e) => setStory(e.target.value)}
           rows={3}
           placeholder="Who used it, and what it cost you to carry it."
-          className="mt-2 w-full rounded-2xl border border-blush-200 bg-blush-50 px-5 py-3 text-ink placeholder:text-ink/30 focus:border-blush-400 focus:outline-none"
+          className="mt-2 w-full border border-line bg-bone px-4 py-3 placeholder:text-ink-muted/60 focus:border-ink focus:outline-none"
         />
       </label>
 
-      <button type="submit" className="btn-pink mt-6 w-full sm:w-auto">
+      <button type="submit" className="btn-primary mt-6 w-full sm:w-auto">
         Request this word
       </button>
     </form>

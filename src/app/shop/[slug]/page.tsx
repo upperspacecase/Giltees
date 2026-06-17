@@ -27,62 +27,67 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   if (!product) notFound();
 
   return (
-    <div className="container-x py-12">
+    <div className="container-x py-10">
       <Link
         href="/shop"
-        className="text-sm font-semibold uppercase tracking-[0.16em] text-blush-600 hover:text-blush-700"
+        className="link-underline text-xs uppercase tracking-wider2"
       >
         ← All words
       </Link>
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <div className="overflow-hidden rounded-[2rem] shadow-soft">
+        <div className="overflow-hidden">
           <TeeMockup product={product} />
         </div>
 
-        <div>
+        <div className="md:py-4">
           <p className="eyebrow">The reclaim tee</p>
-          <h1 className="mt-2 word-mark text-6xl text-ink sm:text-7xl">
+          <h1 className="word-mark mt-2 text-6xl sm:text-7xl">
             {product.word}
           </h1>
+          <p className="mt-4 font-display text-lg font-bold">${product.price}</p>
 
-          <p className="mt-5 text-sm font-semibold uppercase tracking-[0.16em] text-ink-muted">
-            Shamed as
-          </p>
-          <p className="mt-1 text-lg text-ink">{product.shamedAs}</p>
+          <p className="eyebrow mt-8">Shamed as</p>
+          <p className="mt-1 text-lg">{product.shamedAs}</p>
 
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+          <p className="mt-5 leading-relaxed text-ink-muted">
             {product.reclaim}
           </p>
 
-          <div className="mt-8 rounded-2xl border border-blush-200 bg-white p-6">
+          <div className="mt-8 border-t border-line pt-8">
             <AddToCart product={product} />
           </div>
         </div>
       </div>
 
       {/* THE PRACTICE — ships with every word */}
-      <section className="mt-14 grid gap-8 rounded-[2.5rem] bg-ink p-8 text-blush-50 sm:p-12 md:grid-cols-[auto_1fr] md:items-center">
-        <div className="word-mark text-6xl text-blush-300">the practice</div>
-        <div>
-          <p className="eyebrow text-blush-300">Ships with your tee</p>
-          <p className="mt-3 font-display text-2xl font-500 leading-snug">
-            {product.practice}
-          </p>
-          <p className="mt-4 text-sm text-blush-100/70">
-            A small card tucks into every order — the shirt is the outer work,
-            this is the inner one. Want to go further?{" "}
-            <Link href="/deeper" className="underline hover:text-white">
-              Go deeper
-            </Link>
-            .
-          </p>
+      <section className="mt-16 bg-ink p-8 text-paper sm:p-14">
+        <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
+          <div className="word-mark text-5xl text-blush-300 sm:text-6xl">
+            the practice
+          </div>
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-widest2 text-blush-300">
+              Ships with your tee
+            </p>
+            <p className="mt-3 font-display text-2xl font-medium leading-snug">
+              {product.practice}
+            </p>
+            <p className="mt-4 text-sm text-paper/70">
+              A small card tucks into every order — the shirt is the outer work,
+              this is the inner one. Want to go further?{" "}
+              <Link href="/deeper" className="underline hover:text-white">
+                Go deeper
+              </Link>
+              .
+            </p>
+          </div>
         </div>
       </section>
 
       {/* MORE WORDS */}
       <section className="mt-16">
-        <h2 className="font-display text-2xl font-700 text-ink">More words</h2>
+        <h2 className="display text-2xl">More words</h2>
         <div className="mt-5 flex flex-wrap gap-2">
           {products
             .filter((p) => p.slug !== product.slug)
@@ -90,7 +95,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               <Link
                 key={p.slug}
                 href={`/shop/${p.slug}`}
-                className="rounded-full border border-ink/20 px-4 py-2 font-display text-lg capitalize text-ink transition hover:border-ink hover:bg-ink hover:text-blush-50"
+                className="border border-line px-4 py-2 font-display font-semibold capitalize transition hover:border-ink hover:bg-ink hover:text-paper"
               >
                 {p.word}
               </Link>

@@ -5,17 +5,22 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // Product tile gradient classes live as string data here.
+    "./src/lib/**/*.{js,ts}",
   ],
   theme: {
     extend: {
       colors: {
-        // Pink-leading with black accents — built to soften toward
-        // a more organic, gender-neutral palette over time.
+        // Monochrome chrome: white surfaces, near-black ink.
+        // Color enters through photography and sparse pink accents.
         ink: {
-          DEFAULT: "#100a0d",
-          soft: "#1c1418",
-          muted: "#3a2f35",
+          DEFAULT: "#141110",
+          soft: "#2a2522",
+          muted: "#6b625d",
         },
+        paper: "#ffffff",
+        bone: "#f6f4f2",
+        line: "#e7e3e0",
         blush: {
           50: "#fff5f9",
           100: "#ffe6f1",
@@ -26,34 +31,34 @@ const config: Config = {
           600: "#ec2d79",
           700: "#c01a5f",
         },
-        clay: {
-          // warmer, gender-neutral neutrals for the brand's next phase
-          100: "#f4ece7",
-          300: "#d9c4b8",
-          500: "#a8897a",
-        },
       },
       fontFamily: {
         script: ["var(--font-script)", "cursive"],
         display: ["var(--font-display)", "system-ui", "sans-serif"],
-        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        body: ["var(--font-display)", "system-ui", "sans-serif"],
       },
-      boxShadow: {
-        soft: "0 18px 50px -20px rgba(192, 26, 95, 0.45)",
+      letterSpacing: {
+        wider2: "0.14em",
+        widest2: "0.22em",
       },
       keyframes: {
-        floaty: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
         rise: {
           "0%": { opacity: "0", transform: "translateY(14px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        drawerIn: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        fade: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
-        floaty: "floaty 6s ease-in-out infinite",
         rise: "rise 0.7s ease-out both",
+        drawerIn: "drawerIn 0.32s cubic-bezier(0.22,1,0.36,1) both",
+        fade: "fade 0.25s ease-out both",
       },
     },
   },

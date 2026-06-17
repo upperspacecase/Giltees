@@ -9,24 +9,26 @@ export const metadata: Metadata = {
 
 export default function StoryPage() {
   return (
-    <div className="bg-blush-50">
+    <div>
       {/* MANIFESTO HERO */}
-      <section className="container-x py-20 text-center">
-        <p className="eyebrow">The manifesto</p>
-        <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-700 leading-tight text-ink sm:text-5xl">
-          A word only has the power you let it keep in the dark.
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-muted">
-          Giltees began with a simple, stubborn idea: the words used to shame us
-          — <em>crazy, toxic, bitch, fake, poor</em> — only sting while
-          they&apos;re hidden. Say them, wear them, repeat them until they go
-          soft in your mouth, and they stop running the show.
-        </p>
+      <section className="border-b border-line py-20 text-center">
+        <div className="container-x">
+          <p className="eyebrow">The manifesto</p>
+          <h1 className="display mx-auto mt-4 max-w-4xl text-4xl leading-tight sm:text-6xl">
+            A word only has the power you let it keep in the dark
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-ink-muted">
+            Giltees began with a simple, stubborn idea: the words used to shame
+            us — crazy, toxic, bitch, fake, poor — only sting while they&apos;re
+            hidden. Say them, wear them, repeat them until they go soft in your
+            mouth, and they stop running the show.
+          </p>
+        </div>
       </section>
 
-      {/* THE PHILOSOPHY */}
-      <section className="container-x grid gap-12 pb-20 md:grid-cols-2">
-        <div className="rounded-[2rem] bg-white p-8 shadow-sm">
+      {/* PHILOSOPHY */}
+      <section className="container-x grid gap-0 border-b border-line md:grid-cols-2">
+        <div className="border-b border-line p-8 md:border-b-0 md:border-r md:p-12">
           <h2 className="word-mark text-4xl text-blush-600">shadow work</h2>
           <p className="mt-4 text-ink-muted">
             In Jungian terms, the &quot;shadow&quot; is everything we&apos;ve
@@ -42,29 +44,27 @@ export default function StoryPage() {
             word.
           </p>
         </div>
-        <div className="rounded-[2rem] bg-ink p-8 text-blush-50 shadow-soft">
-          <h2 className="word-mark text-4xl text-blush-300">
-            you can wear
-          </h2>
-          <p className="mt-4 text-blush-100/85">
+        <div className="bg-ink p-8 text-paper md:p-12">
+          <h2 className="word-mark text-4xl text-blush-300">you can wear</h2>
+          <p className="mt-4 text-paper/85">
             Therapy happens in a room once a week. Your clothes are with you all
             day. We wanted the work to be wearable — playful, soft, a little
             funny — so it doesn&apos;t feel like punishment.
           </p>
-          <p className="mt-4 text-blush-100/85">
-            That&apos;s why every word is set in a gentle, rounded font on
-            pink-and-black. Heavy idea, light touch. The lightness is the point:
-            you&apos;re allowed to heal without it being grim.
+          <p className="mt-4 text-paper/85">
+            That&apos;s why every word is set in a gentle, rounded font. Heavy
+            idea, light touch. The lightness is the point: you&apos;re allowed to
+            heal without it being grim.
           </p>
         </div>
       </section>
 
       {/* FOUNDER JOURNEY */}
-      <section className="container-x pb-20">
+      <section className="container-x py-20">
         <div className="mx-auto max-w-3xl">
           <p className="eyebrow">How it started</p>
-          <h2 className="mt-3 font-display text-4xl font-700 text-ink">
-            The founder&apos;s word was &quot;crazy.&quot;
+          <h2 className="display mt-3 text-4xl sm:text-5xl">
+            The founder&apos;s word was “crazy”
           </h2>
           <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink-muted">
             <p>
@@ -87,14 +87,14 @@ export default function StoryPage() {
               said, <em>&quot;me too.&quot;</em> That was the whole business
               plan: a word, worn out loud, turning shame into a conversation.
             </p>
-            <p className="font-display text-xl font-600 text-ink">
+            <p className="font-display text-xl font-bold text-ink">
               Giltees is that journal page, made wearable — and made for
               everyone, of every gender, who was ever told they were too much of
               the wrong thing.
             </p>
           </div>
 
-          <div className="mt-10 rounded-3xl border border-blush-200 bg-white p-7">
+          <div className="mt-10 border border-line p-7">
             <p className="text-ink-muted">
               We&apos;re early, and on purpose. The look will keep softening
               toward something more organic and gender-neutral, and soon
@@ -102,7 +102,7 @@ export default function StoryPage() {
               mockups. A men&apos;s line is coming. The practice stays the same.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/shop" className="btn-pink">
+              <Link href="/shop" className="btn-primary">
                 Find your word
               </Link>
               <Link href="/deeper" className="btn-outline">

@@ -15,22 +15,28 @@ people, plus a men's line later.
 ## Stack
 
 - [Next.js 14](https://nextjs.org) (App Router) + TypeScript
-- [Tailwind CSS](https://tailwindcss.com) for the pink/black design system
-- `next/font` — Pacifico (retro-script wordmark), Fredoka (soft display),
-  Quicksand (body)
-- Client-side cart via React Context + `localStorage` (no backend required to demo)
+- [Tailwind CSS](https://tailwindcss.com) — a clean, editorial **white + black**
+  design system (monochrome chrome, sharp corners, pink via imagery/accents)
+- `next/font` — Pacifico (retro-script wordmark, kept as the brand anchor) +
+  Archivo (heavy uppercase headings & body)
+- Client-side **cart**, **wishlist**, and **slide-out bag drawer** via React
+  Context + `localStorage` (no backend required to demo)
 
 ## Pages
 
 | Route          | What it is                                                            |
 | -------------- | --------------------------------------------------------------------- |
-| `/`            | Home — hero leads with the word **crazy** + the 3-step practice       |
+| `/`            | Home — full-bleed hero leads with **crazy** + spotlight + product rail |
 | `/story`       | Manifesto + the founder's journey                                     |
 | `/shop`        | The product line + the **Request your word** feature                  |
 | `/shop/[slug]` | Product page with a short shadow-work **practice** prompt per word    |
-| `/cart`        | Cart with quantities, sizes, free-shipping threshold                  |
+| `/cart`        | Full bag view with quantities, sizes, free-shipping threshold         |
 | `/checkout`    | Demo checkout (no payment processor wired up yet)                     |
+| `/wishlist`    | Saved words (heart toggle on every product card)                      |
 | `/deeper`      | **Go deeper** — shadow-work & astrology readings + therapist directory |
+
+The header bag icon opens a **slide-out drawer** (`CartDrawer`) with an empty
+state and an "explore more" rail; `/cart` remains as the full-page view.
 
 ## Develop
 

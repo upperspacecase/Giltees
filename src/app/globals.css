@@ -2,61 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --grain-opacity: 0.04;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-blush-50 text-ink antialiased;
-  font-feature-settings: "ss01", "cv01";
-}
-
-/* Subtle paper grain — nods to the organic direction the brand is heading. */
-.grain::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  @apply bg-paper text-ink antialiased;
 }
 
 @layer components {
   .container-x {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8;
   }
 
+  /* Sharp-cornered buttons — solid black (primary) and outline (secondary),
+     matching the editorial, minimal reference. */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3
-      text-sm font-semibold uppercase tracking-[0.18em] transition
-      focus:outline-none focus-visible:ring-2 focus-visible:ring-blush-400
-      focus-visible:ring-offset-2 focus-visible:ring-offset-blush-50;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 text-xs
+      font-bold uppercase tracking-widest2 transition-colors duration-200
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-ink
+      focus-visible:ring-offset-2;
   }
   .btn-primary {
-    @apply btn bg-ink text-blush-50 hover:bg-ink-soft;
-  }
-  .btn-pink {
-    @apply btn bg-blush-500 text-white shadow-soft hover:bg-blush-600;
+    @apply btn bg-ink text-paper hover:bg-ink-soft;
   }
   .btn-outline {
-    @apply btn border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-blush-50;
+    @apply btn border border-ink text-ink hover:bg-ink hover:text-paper;
+  }
+  .btn-pink {
+    @apply btn bg-blush-500 text-white hover:bg-blush-600;
   }
 
+  /* Small gray category/eyebrow label. */
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.32em] text-blush-600;
+    @apply text-[11px] font-semibold uppercase tracking-widest2 text-ink-muted;
+  }
+
+  /* Heavy uppercase editorial headings. */
+  .display {
+    @apply font-display font-extrabold uppercase leading-[0.95] tracking-tight;
   }
 
   .word-mark {
     @apply font-script leading-none;
   }
+
+  .hairline {
+    @apply border-line;
+  }
+
+  /* Underlined text link with the reference's understated style. */
+  .link-underline {
+    @apply font-semibold underline decoration-1 underline-offset-4 hover:opacity-60;
+  }
 }
 
-/* Respect users who prefer less motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

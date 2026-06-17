@@ -1,7 +1,8 @@
 import type { Product } from "@/lib/products";
 
 // Stylized tee mockup. A deliberate placeholder for the brand's next phase:
-// real photography of diverse people wearing the pieces.
+// real photography of diverse people wearing the pieces. The gradient is where
+// the brand's pink lives until those photos exist.
 export function TeeMockup({
   product,
   className = "",
@@ -9,36 +10,35 @@ export function TeeMockup({
   product: Pick<Product, "word" | "tileFrom" | "tileTo" | "textTone">;
   className?: string;
 }) {
-  const wordColor =
-    product.textTone === "light" ? "text-blush-50" : "text-ink";
+  const wordColor = product.textTone === "light" ? "text-paper" : "text-ink";
 
   return (
     <div
       className={`relative flex aspect-[4/5] items-center justify-center overflow-hidden bg-gradient-to-br ${product.tileFrom} ${product.tileTo} ${className}`}
     >
-      {/* Shirt silhouette */}
+      {/* Soft shirt silhouette */}
       <svg
         viewBox="0 0 200 220"
-        className="absolute inset-0 h-full w-full opacity-95"
+        className="absolute inset-0 h-full w-full opacity-90"
         aria-hidden="true"
       >
         <path
-          d="M70 20 L40 35 L20 70 L40 85 L52 76 L52 200 L148 200 L148 76 L160 85 L180 70 L160 35 L130 20 C124 38 76 38 70 20 Z"
-          fill="rgba(255,255,255,0.08)"
-          stroke="rgba(255,255,255,0.25)"
-          strokeWidth="1.5"
+          d="M70 22 L42 36 L24 70 L42 84 L54 76 L54 198 L146 198 L146 76 L158 84 L176 70 L158 36 L130 22 C124 38 76 38 70 22 Z"
+          fill="rgba(255,255,255,0.07)"
+          stroke="rgba(255,255,255,0.22)"
+          strokeWidth="1.25"
         />
       </svg>
 
       <div className="relative z-10 px-6 text-center">
         <span
-          className={`word-mark block text-4xl sm:text-5xl md:text-6xl ${wordColor} drop-shadow-sm`}
+          className={`word-mark block text-4xl sm:text-5xl ${wordColor} drop-shadow-sm`}
         >
           {product.word}
         </span>
       </div>
 
-      <span className="absolute bottom-3 right-4 z-10 font-script text-sm text-white/60">
+      <span className="absolute bottom-3 right-4 z-10 word-mark text-sm text-white/55">
         Giltees
       </span>
     </div>

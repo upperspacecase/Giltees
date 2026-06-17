@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
+import { products } from "@/lib/products";
 
 export default function CartPage() {
   const { items, subtotal, updateQty, removeItem } = useCart();
@@ -9,11 +10,11 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container-x py-24 text-center">
-        <p className="word-mark text-5xl text-blush-400">empty for now</p>
-        <p className="mt-4 text-ink-muted">
+        <h1 className="display text-4xl">Your bag is empty</h1>
+        <p className="mt-3 text-ink-muted">
           Nothing reclaimed yet. Find the word that was used against you.
         </p>
-        <Link href="/shop" className="btn-pink mt-8">
+        <Link href="/shop" className="btn-primary mt-8">
           Shop the words
         </Link>
       </div>
@@ -23,69 +24,79 @@ export default function CartPage() {
   const shipping = subtotal >= 75 ? 0 : 6;
 
   return (
-    <div className="container-x py-16">
-      <h1 className="font-display text-5xl font-700 text-ink">Your cart</h1>
+    <div className="container-x py-12">
+      <h1 className="display text-5xl">Your bag</h1>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
-        <ul className="space-y-4">
-          {items.map((item) => (
-            <li
-              key={`${item.slug}-${item.size}`}
-              className="flex flex-wrap items-center gap-4 rounded-3xl border border-blush-200 bg-white p-5"
-            >
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blush-500 to-ink">
-                <span className="word-mark text-lg text-blush-50">
-                  {item.word}
-                </span>
-              </div>
+      <div className="mt-10 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
+        <ul className="divide-y divide-line border-y border-line">
+          {items.map((item) => {
+            const p = products.find((x) => x.slug === item.slug);
+            return (
+              <li
+                key={`${item.slug}-${item.size}`}
+                className="flex flex-wrap items-center gap-5 py-6"
+              >
+                <div
+                  className={`flex h-24 w-20 shrink-0 items-center justify-center bg-gradient-to-br ${
+                    p?.tileFrom ?? "from-blush-500"
+                  } ${p?.tileTo ?? "to-ink"}`}
+                >
+                  <span className="word-mark text-base text-paper">
+                    {item.word}
+                  </span>
+                </div>
 
-              <div className="min-w-0 flex-1">
-                <p className="font-display text-xl font-600 capitalize text-ink">
-                  “{item.word}”
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] uppercase tracking-wider2 text-ink-muted">
+                    The reclaim tee
+                  </p>
+                  <p className="font-display font-bold capitalize">
+                    “{item.word}”
+                  </p>
+                  <p className="text-sm text-ink-muted">
+                    Size {item.size} · ${item.price}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => removeItem(item.slug, item.size)}
+                    className="mt-1 text-[11px] font-semibold uppercase tracking-wider2 underline underline-offset-4 hover:opacity-60"
+                  >
+                    Remove
+                  </button>
+                </div>
+
+                <div className="flex items-center border border-line">
+                  <button
+                    type="button"
+                    aria-label="Decrease quantity"
+                    onClick={() => updateQty(item.slug, item.size, item.qty - 1)}
+                    className="px-3 py-2 text-lg leading-none hover:bg-bone"
+                  >
+                    –
+                  </button>
+                  <span className="w-8 text-center font-semibold">
+                    {item.qty}
+                  </span>
+                  <button
+                    type="button"
+                    aria-label="Increase quantity"
+                    onClick={() => updateQty(item.slug, item.size, item.qty + 1)}
+                    className="px-3 py-2 text-lg leading-none hover:bg-bone"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <p className="w-16 text-right font-display font-bold">
+                  ${item.qty * item.price}
                 </p>
-                <p className="text-sm text-ink-muted">
-                  Size {item.size} · ${item.price}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => removeItem(item.slug, item.size)}
-                  className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-blush-600 hover:text-blush-700"
-                >
-                  Remove
-                </button>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Decrease quantity"
-                  onClick={() => updateQty(item.slug, item.size, item.qty - 1)}
-                  className="h-9 w-9 rounded-full border border-ink/20 text-lg leading-none text-ink hover:border-ink"
-                >
-                  –
-                </button>
-                <span className="w-6 text-center font-semibold">
-                  {item.qty}
-                </span>
-                <button
-                  type="button"
-                  aria-label="Increase quantity"
-                  onClick={() => updateQty(item.slug, item.size, item.qty + 1)}
-                  className="h-9 w-9 rounded-full border border-ink/20 text-lg leading-none text-ink hover:border-ink"
-                >
-                  +
-                </button>
-              </div>
-
-              <p className="w-16 text-right font-display text-lg font-600 text-ink">
-                ${item.qty * item.price}
-              </p>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
-        <aside className="h-fit rounded-3xl border border-blush-200 bg-white p-7 shadow-soft">
-          <h2 className="font-display text-2xl font-700 text-ink">Summary</h2>
+        <aside className="h-fit border border-line p-7">
+          <h2 className="display text-2xl">Summary</h2>
           <dl className="mt-5 space-y-3 text-ink-muted">
             <div className="flex justify-between">
               <dt>Subtotal</dt>
@@ -103,18 +114,16 @@ export default function CartPage() {
               </p>
             )}
           </dl>
-          <div className="mt-5 flex justify-between border-t border-blush-200 pt-5">
-            <span className="font-display text-xl font-700 text-ink">Total</span>
-            <span className="font-display text-xl font-700 text-ink">
-              ${subtotal + shipping}
-            </span>
+          <div className="mt-5 flex justify-between border-t border-line pt-5">
+            <span className="display text-xl">Total</span>
+            <span className="display text-xl">${subtotal + shipping}</span>
           </div>
-          <Link href="/checkout" className="btn-pink mt-6 w-full">
+          <Link href="/checkout" className="btn-primary mt-6 w-full">
             Checkout
           </Link>
           <Link
             href="/shop"
-            className="mt-3 block text-center text-sm font-semibold text-blush-600 hover:text-blush-700"
+            className="mt-3 block text-center text-[11px] font-semibold uppercase tracking-wider2 underline underline-offset-4 hover:opacity-60"
           >
             Keep shopping
           </Link>

@@ -1,48 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useCart } from "./CartContext";
+import { useUI } from "./UIContext";
+import { useWishlist } from "./WishlistContext";
+import { HeartIcon } from "./icons";
 import type { Product } from "@/lib/products";
 
 const SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"];
 
 export function AddToCart({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const { openCart } = useUI();
+  const { has, toggle } = useWishlist();
   const [size, setSize] = useState("M");
-  const [added, setAdded] = useState(false);
+  const wished = has(product.slug);
 
   function add() {
     addItem(
-      {
-        slug: product.slug,
-        word: product.word,
-        price: product.price,
-        size,
-      },
+      { slug: product.slug, word: product.word, price: product.price, size },
       1
     );
-    setAdded(true);
-    window.setTimeout(() => setAdded(false), 2500);
+    openCart();
   }
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <span className="eyebrow">Size — unisex fit</span>
-        <span className="text-sm text-ink-muted">XS–4XL</span>
+        <span className="text-xs text-ink-muted">XS–4XL</span>
       </div>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-8">
         {SIZES.map((s) => (
           <button
             key={s}
             type="button"
             onClick={() => setSize(s)}
             aria-pressed={size === s}
-            className={`min-w-12 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+            className={`h-11 border text-sm font-semibold transition ${
               size === s
-                ? "border-ink bg-ink text-blush-50"
-                : "border-ink/20 text-ink hover:border-ink"
+                ? "border-ink bg-ink text-paper"
+                : "border-line text-ink hover:border-ink"
             }`}
           >
             {s}
@@ -50,23 +48,20 @@ export function AddToCart({ product }: { product: Product }) {
         ))}
       </div>
 
-      <div className="mt-7 flex flex-wrap items-center gap-3">
-        <button type="button" onClick={add} className="btn-pink">
-          Add to cart — ${product.price}
+      <div className="mt-6 flex gap-3">
+        <button type="button" onClick={add} className="btn-primary flex-1">
+          Add to bag — ${product.price}
         </button>
-        <Link href="/cart" className="btn-outline">
-          Go to cart
-        </Link>
+        <button
+          type="button"
+          onClick={() => toggle(product.slug)}
+          aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
+          aria-pressed={wished}
+          className="grid h-auto w-14 shrink-0 place-items-center border border-ink hover:bg-bone"
+        >
+          <HeartIcon className="h-5 w-5" filled={wished} />
+        </button>
       </div>
-
-      <p
-        aria-live="polite"
-        className={`mt-3 text-sm font-semibold text-blush-600 transition ${
-          added ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        Added “{product.word}” ({size}) to your cart 🖤
-      </p>
     </div>
   );
 }
