@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grain-opacity: 0.04;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-blush-50 text-ink antialiased;
+  font-feature-settings: "ss01", "cv01";
+}
+
+/* Subtle paper grain — nods to the organic direction the brand is heading. */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3
+      text-sm font-semibold uppercase tracking-[0.18em] transition
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-blush-400
+      focus-visible:ring-offset-2 focus-visible:ring-offset-blush-50;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-blush-50 hover:bg-ink-soft;
+  }
+  .btn-pink {
+    @apply btn bg-blush-500 text-white shadow-soft hover:bg-blush-600;
+  }
+  .btn-outline {
+    @apply btn border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-blush-50;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.32em] text-blush-600;
+  }
+
+  .word-mark {
+    @apply font-script leading-none;
+  }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
