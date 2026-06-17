@@ -5,13 +5,17 @@ a product at its file (one line in `src/lib/products.ts`).
 
 ## Product photos
 
-Put each tee photo in `products/` named after the product **slug**:
+Put each tee photo in `products/` named after the product **slug**. Current
+photos are WebP (converted from the originals to keep the repo light):
 
 ```
-public/images/products/toxic.png      ← "toxic" tee
-public/images/products/crazy.jpg      ← "crazy" tee
-public/images/products/bitch.jpg      ← ...
+public/images/products/toxic.webp     ← "toxic" tee
+public/images/products/crazy.webp     ← "crazy" tee
+public/images/products/bitch.webp     ← ...
 ```
+
+You can drop in JPG/PNG too; just point the product's `image` field at the
+right extension. WebP is preferred for size.
 
 Slugs (match these filenames):
 `crazy, toxic, bitch, fake, poor, too-much, sensitive, dramatic`

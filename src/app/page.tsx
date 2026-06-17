@@ -5,7 +5,7 @@ import { TeeMockup } from "@/components/TeeMockup";
 
 // Hero is driven by one config — swap `image`/`headline` to re-shoot the hero.
 const hero = {
-  image: "/images/products/crazy.png",
+  image: "/images/products/crazy.webp",
   headline: "Shadow work you can wear",
   subhead:
     "Taking the words we've been shamed by and reclaiming them. That's real retail therapy.",
